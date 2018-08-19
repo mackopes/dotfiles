@@ -39,8 +39,17 @@ let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
 syntax enable
-set background=dark
-colorscheme solarized
+if has("unix")
+  let s:uname = system("echo -n \"$(uname)\"")
+  if !v:shell_error && s:uname == "Linux"
+      set background=dark
+      colorscheme solarized
+      " set correct colorscheme for vim
+      set t_Co=256
+      " let g:solarized_termcolors=256
+      let g:solarized_termtrans = 1
+    endif
+endif
 
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
@@ -109,11 +118,6 @@ let g:SuperTabDefaultCompletionType = '<C-n>'
 let g:UltiSnipsExpandTrigger = "<tab>"
 let g:UltiSnipsJumpForwardTrigger = "<tab>"
 let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" set correct colorscheme for vim
-set t_Co=256
-" let g:solarized_termcolors=256
-let g:solarized_termtrans = 1
 
 " airline theme
 let g:airline_theme='murmur'
