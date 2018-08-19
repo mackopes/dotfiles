@@ -70,9 +70,6 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# Add my scripts to shell commands
-# export PATH="/home/mackopes/scripts:$PATH"
-
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
