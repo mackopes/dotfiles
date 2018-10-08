@@ -31,6 +31,9 @@ nnoremap tl :tablast<CR>
 nnoremap <leader>g :ClangFormat<enter>
 vnoremap <leader>g :ClangFormat<enter>
 
+nnoremap gf :YcmCompleter GoToDefinition<CR>
+nnoremap gd :YcmCompleter GoToDeclaration<CR>
+
 " FixIt
 nnoremap <leader>r :YcmCompleter FixIt<enter>
 
