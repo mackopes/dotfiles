@@ -101,6 +101,9 @@ alias vi="vim"
 
 eval $(thefuck --alias)
 
+# aliases
+alias tmux='tmux -u'
+
 # Exports
 
 export LANG=en_US.UTF-8
