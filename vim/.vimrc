@@ -100,7 +100,7 @@ filetype plugin indent on    " required
 
 " YouCompleteMe settings
 " default ycm conf
-let g:ycm_global_ycm_extra_conf = "~/.vim/bundle/YouCompleteMe/third_party/ycmd/cpp/ycm/.ycm_extra_conf.py"
+let g:ycm_global_ycm_extra_conf = "~/.vim/.ycm_extra_conf.py"
 
 " semantic completion after each insertion
 let g:ycm_semantic_triggers = { 'cpp': [ 're!.' ], 'c': ['re!.'] }
