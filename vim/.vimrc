@@ -16,6 +16,7 @@ set wildmenu
 set lazyredraw
 set ttimeoutlen=10
 set encoding=UTF-8
+set backspace=indent,eol,start
 
 " Key remaps
 " NEDTToggle remap
