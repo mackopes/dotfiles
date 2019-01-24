@@ -46,13 +46,20 @@ syntax enable
 if has("unix")
   let s:uname = system("echo -n \"$(uname)\"")
   if !v:shell_error && s:uname == "Linux"
-      set background=dark
-      colorscheme solarized
-      " set correct colorscheme for vim
-      set t_Co=256
-      " let g:solarized_termcolors=256
-      let g:solarized_termtrans = 1
-    endif
+    set background=dark
+    colorscheme solarized
+    " set correct colorscheme for vim
+    set t_Co=256
+    " let g:solarized_termcolors=256
+    let g:solarized_termtrans = 1
+  else
+    set background=dark
+    colorscheme solarized
+    " set correct colorscheme for vim
+    set t_Co=256
+    let g:solarized_termcolors=256
+    let g:solarized_termtrans = 1
+  endif
 endif
 
 " set the runtime path to include Vundle and initialize
