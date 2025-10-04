@@ -5,7 +5,7 @@ depends = []
 
 [default.files]
 "kitty/kitty.conf" = "~/.config/kitty/kitty.conf"
-"kitty/catppucin-kitty/themes/macchiato.conf" = "~/config/kitty/theme.conf"
+"kitty/catppucin-kitty/themes/macchiato.conf" = "~/.config/kitty/theme.conf"
 nvim = "~/.config/nvim"
 zshrc = "~/.zshrc"
 "zshrc.d" = "~/.zshrc.d"
