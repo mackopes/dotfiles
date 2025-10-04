@@ -1,6 +1,3 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
-
 # Path to your oh-my-zsh installation.
 source ~/.antigen.zsh
 
@@ -9,10 +6,10 @@ antigen use oh-my-zsh
 
 # Bundles from the default repo (robbyrussell's oh-my-zsh).
 antigen bundle git
-antigen bundle osx
 {{#if (eq os "macos")}}
-antigen bundle cp
+antigen bundle osx
 {{/if}}
+antigen bundle cp
 antigen bundle brew
 antigen bundle python
 antigen bundle z
