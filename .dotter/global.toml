@@ -1,0 +1,14 @@
+[helpers]
+
+[default]
+depends = []
+
+[default.files]
+# kitty = ""
+# nvim = ""
+zshrc = "~/.zshrc"
+
+[default.variables]
+
+[settings]
+default_target_type = "automatic"

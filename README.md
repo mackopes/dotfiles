@@ -1,3 +1,7 @@
 # Dotfiles
 
-Personal dotfiles
+Contains dotfiles for:
+
+- nvim
+- kitty
+- zsh
