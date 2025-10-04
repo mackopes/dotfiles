@@ -4,8 +4,8 @@
 depends = []
 
 [default.files]
-# kitty = ""
-# nvim = ""
+kitty = "~/.config/kitty"
+nvim = "~/.config/nvim"
 zshrc = "~/.zshrc"
 "zshrc.d" = "~/.zshrc.d"
 
