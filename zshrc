@@ -45,11 +45,21 @@ SPACESHIP_GCLOUD_SHOW=false
 unsetopt correct
 
 autoload -Uz compinit
+{{#if (eq os "macos")}}
 if [ "$(date +'%j')" != "$(stat -f '%Sm' -t '%j' ~/.zcompdump 2>/dev/null)" ]; then
     compinit
 else
     compinit -C
 fi
+{{/if}}
+
+{{#if (eq os "linux")}}
+if [ $(date +'%j') != $(stat -c '%Y' ~/.zcompdump 2>/dev/null | date -r - +'%j' 2>/dev/null || echo 0) ]; then
+    compinit
+else
+    compinit -C
+fi
+{{/if}}
 
 # Aliases
 alias zshconfig="nvim ~/.zshrc"
