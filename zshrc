@@ -74,3 +74,5 @@ source ~/.zshrc.d/zshrc_mac
 source ~/.zshrc.d/zshrc_linux
 {{/if}}
 
+export TODOIST_API_TOKEN={{todoist_api_token}}
+
