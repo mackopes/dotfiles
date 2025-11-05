@@ -17,3 +17,7 @@ export MAKEFLAGS="-j$(nproc)"
 # using outdated gcc-13 (instead of gcc 15) as some cuda related packages need it
 # export CC=/usr/sbin/gcc-13
 # export CXX=/usr/sbin/g++-13
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
