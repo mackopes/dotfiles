@@ -3,6 +3,10 @@ return {
   {
     "catppuccin/nvim",
     name = "catppuccin",
+    -- TODO: Remove version=false once catppuccin releases v1.12.0+ with special/bufferline module
+    -- Using main branch because LazyVim requires catppuccin.special.bufferline which isn't in v1.11.0 yet
+    -- See: https://github.com/catppuccin/nvim/issues/934
+    version = false,
     priority = 1000,
     opts = {
       flavour = "macchiato", -- Back to macchiato flavor
