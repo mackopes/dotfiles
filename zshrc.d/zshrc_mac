@@ -19,7 +19,7 @@ if [ -x "$(command -v conda)" ]; then
     conda config --set auto_activate_base false
 fi
 
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
+# export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/Users/mackopes/.bin:$PATH"
 
 # The next line updates PATH for the Google Cloud SDK.
