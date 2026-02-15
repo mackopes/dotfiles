@@ -29,7 +29,7 @@ if [ -f '/Users/mackopes/.gcloud/google-cloud-sdk/path.zsh.inc' ]; then . '/User
 if [ -f '/Users/mackopes/.gcloud/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/mackopes/.gcloud/google-cloud-sdk/completion.zsh.inc'; fi
 
 # Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
-export PATH="$PATH:$HOME/.rvm/bin"
+# export PATH="$PATH:$HOME/.rvm/bin"
 
 # This was added for workflow to manage nvm and node versions. I don't think I need this anymore.
 # In fact, I do need it for now. Maybe switch to something faster like fnm?
@@ -41,3 +41,8 @@ export PATH="$PATH:/Users/mp/.local/bin"
 export PATH="$(brew --prefix python)/libexec/bin:$PATH"
 alias rake="bundle exec rake"
 
+export PNPM_HOME="/Users/mp/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
