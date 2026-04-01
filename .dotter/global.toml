@@ -9,6 +9,9 @@ depends = []
 nvim = "~/.config/nvim"
 zshrc = "~/.zshrc"
 "zshrc.d" = "~/.zshrc.d"
+"opencode/opencode.json" = "~/.config/opencode/opencode.json"
+"opencode/tui.json" = "~/.config/opencode/tui.json"
+"opencode/package.json" = "~/.config/opencode/package.json"
 
 [default.variables]
 
