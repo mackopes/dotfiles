@@ -12,6 +12,7 @@ zshrc = "~/.zshrc"
 "opencode/opencode.json" = "~/.config/opencode/opencode.json"
 "opencode/tui.json" = "~/.config/opencode/tui.json"
 "opencode/package.json" = "~/.config/opencode/package.json"
+"lazyworktree/config.yml" = "~/.config/lazyworktree/config.yml"
 
 [default.variables]
 

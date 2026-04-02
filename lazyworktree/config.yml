@@ -1,0 +1,13 @@
+custom_commands:
+  universal:
+    t:
+      command: zsh
+      description: Open in Kitty tab
+      new_tab: true
+      show_help: true
+    b:
+      command: >-
+        bash -c 'PORT=$(grep PORT_FRONTEND "$WORKTREE_PATH/.env" | cut -d= -f2); echo "http://localhost:${PORT:-3000}"'
+      description: Show URL
+      show_output: true
+      show_help: true
