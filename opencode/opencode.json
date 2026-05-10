@@ -14,10 +14,10 @@
       "url": "https://mcp.linear.app/mcp"
     }
   },
-  "plugin": ["opencode-claude-auth"],
-  // TODO: Configure these
+  "plugin": ["opencode-claude-auth", "opencode-openai-codex-auth"],
   // "model": "openai/gpt-5.3-codex-spark",
-  "small_model": "anthropic/claude-haiku-4-5", // title gen, lightweight tasks
+  "small_model": "openai/gpt-5.3-codex-spark",
+  // "small_model": "anthropic/claude-haiku-4-5", // title gen, lightweight tasks
   "provider": {
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
@@ -26,13 +26,17 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "qwen3-coder-next:q4_K_M": {
+        "qwen3.6:27b-coding-mxfp8": {
           "_launch": true,
-          "name": "qwen3-coder-next:q4_K_M"
+          "name": "qwen3.6:27b-coding-mxfp8"
         },
-        "qwen3:8b": {
+        "qwen3.6": {
           "_launch": true,
-          "name": "qwen3:8b"
+          "name": "qwen3.6"
+        },
+        "gemma4": {
+          "_launch": true,
+          "name": "gemma4"
         }
       }
     }
@@ -43,8 +47,9 @@
       // "model": "ollama/qwen3-coder-next:q4_K_M"
       // "model": "anthropic/claude-haiku-4-5",
       // "model": "anthropic/claude-sonnet-4-6",
-      "model": "opencode/claude-sonnet-4-6",
-      // "model": "opencode/gpt-5.3-codex-spark",
+      // "model": "opencode/claude-sonnet-4-6",
+      // "model": "openai/gpt-5.3-codex-spark",
+      "model": "openai/gpt-5.4",
       "permission": {
         "bash": {
           "git commit*": "deny",
@@ -57,14 +62,14 @@
       }
     },
     "explore": {
-      // "model": "anthropic/claude-sonnet-4-6",
-      "model": "opencode/claude-sonnet-4-6",
+      "model": "opencode/gpt-5.4-mini",
+      // "model": "opencode/claude-sonnet-4-6",
       "mode": "subagent"
     },
     "plan": {
-      // "model": "anthropic/claude-opus-4-6",
-      "model": "opencode/claude-opus-4-6",
-      // "model": "opencode/gpt-5.4",
+      // "model": "opencode/claude-opus-4-6",
+      // "model": "openai/gpt-5.4",
+      "model": "openai/gpt-5.5",
       "temperature": 0.1,
       "tools": {
         "write": false,
@@ -94,8 +99,8 @@
       }
     },
     "git": {
-      "model": "anthropic/claude-sonnet-4-6",
-      // "model": "opencode/gpt-5.3-codex-spark",
+      // "model": "anthropic/claude-sonnet-4-6",
+      "model": "openai/gpt-5.3-codex-spark",
       "mode": "subagent",
       "description": "Git and GitHub operations agent (stage, commit, push, create/update PRs, read PR state). ONLY invoke this agent when explicitly asked to perform a git operation. Since this agent cannot read any files or code on its own, the calling agent must provide all necessary context in the prompt (e.g. file paths, diff content, commit message, PR title/body, branch names, etc.).",
       "tools": {
