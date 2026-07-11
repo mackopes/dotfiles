@@ -7,18 +7,28 @@
     },
     "chrome-devtools": {
       "type": "local",
-      "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ]
     },
     "linear": {
       "type": "remote",
       "url": "https://mcp.linear.app/mcp"
     }
   },
-  "disabled_providers": ["amazon-bedrock"],
-  "plugin": ["opencode-claude-auth", "opencode-openai-codex-auth"],
+  "disabled_providers": [
+    "amazon-bedrock"
+  ],
+  "plugin": [
+    "opencode-claude-auth",
+    "opencode-openai-codex-auth"
+  ],
   // "model": "openai/gpt-5.3-codex-spark",
   "small_model": "openai/gpt-5.4",
   // "small_model": "anthropic/claude-haiku-4-5", // title gen, lightweight tasks
+  "small_model": "openai/gpt-5.6-luna",
   "provider": {
     "ollama": {
       "npm": "@ai-sdk/openai-compatible",
@@ -50,7 +60,8 @@
       // "model": "anthropic/claude-sonnet-4-6",
       // "model": "opencode/claude-sonnet-4-6",
       // "model": "openai/gpt-5.3-codex-spark",
-      "model": "openai/gpt-5.4",
+      "model": "openai/gpt-5.6-terra",
+      "variant": "high",
       "permission": {
         "bash": {
           "git commit*": "deny",
@@ -63,14 +74,16 @@
       }
     },
     "explore": {
-      "model": "opencode/gpt-5.4-mini",
+      "model": "opencode/gpt-5.6-luna",
+      "variant": "high",
       // "model": "opencode/claude-sonnet-4-6",
       "mode": "subagent"
     },
     "plan": {
       // "model": "opencode/claude-opus-4-6",
       // "model": "openai/gpt-5.4",
-      "model": "openai/gpt-5.5",
+      "model": "openai/gpt-5.6-sol",
+      "variant": "high",
       "temperature": 0.1,
       "tools": {
         "write": false,
@@ -125,7 +138,7 @@
     },
     "git": {
       // "model": "anthropic/claude-sonnet-4-6",
-      "model": "openai/gpt-5.3-codex-spark",
+      "model": "openai/gpt-5.6-luna",
       "mode": "subagent",
       "description": "Git and GitHub operations agent (stage, commit, push, create/update PRs, read PR state). ONLY invoke this agent when explicitly asked to perform a git operation. Since this agent cannot read any files or code on its own, the calling agent must provide all necessary context in the prompt (e.g. file paths, diff content, commit message, PR title/body, branch names, etc.).",
       "tools": {
