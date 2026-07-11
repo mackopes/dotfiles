@@ -14,9 +14,10 @@
       "url": "https://mcp.linear.app/mcp"
     }
   },
+  "disabled_providers": ["amazon-bedrock"],
   "plugin": ["opencode-claude-auth", "opencode-openai-codex-auth"],
   // "model": "openai/gpt-5.3-codex-spark",
-  "small_model": "openai/gpt-5.3-codex-spark",
+  "small_model": "openai/gpt-5.4",
   // "small_model": "anthropic/claude-haiku-4-5", // title gen, lightweight tasks
   "provider": {
     "ollama": {
@@ -83,13 +84,37 @@
           "git diff*": "allow",
           "git log*": "allow",
           "git show*": "allow",
+          "coast build": "ask",
+          "coast run *": "ask",
+          "coast ui": "ask",
+          "coast harness-setup-prompt *": "ask",
+          "coast docs": "allow",
+          "coast docs --path *": "allow",
+          "coast search-docs *": "allow",
+          "coast --version": "allow",
+          "coast help": "allow",
+          "coast build --help": "allow",
+          "coast run --help": "allow",
+          "coast ui --help": "allow",
+          "coast harness-setup-prompt --help": "allow",
+          "coast lookup": "allow",
+          "coast ls": "allow",
+          "coast ps": "allow",
+          "coast logs *": "allow",
+          "git worktree list": "allow",
+          "git worktree list --porcelain": "allow",
+          "pwd": "allow",
+          "docker compose config": "allow",
+          "docker compose ps": "allow",
+          "docker volume ls": "allow",
           "rg *": "allow",
           "tree *": "allow",
           "wc *": "allow",
           "head *": "allow",
           "tail *": "allow",
           "pnpm test*": "ask",
-          "docker compose logs *": "allow"
+          "docker compose logs *": "allow",
+          "dixie *": "allow"
         },
         "task": {
           "*": "deny",
