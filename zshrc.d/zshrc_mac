@@ -50,3 +50,6 @@ esac
 export AWS_PROFILE=blurry-prod
 
 . "$HOME/.cargo/env"
+
+# Coast CLI
+export PATH="$HOME/.coast/bin:$PATH"
