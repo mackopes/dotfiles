@@ -48,3 +48,5 @@ case ":$PATH:" in
 esac
 
 export AWS_PROFILE=blurry-prod
+
+. "$HOME/.cargo/env"
