@@ -76,3 +76,5 @@ source ~/.zshrc.d/zshrc_linux
 
 export TODOIST_API_TOKEN={{todoist_api_token}}
 
+export EDITOR=nvim
+
