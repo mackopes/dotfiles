@@ -12,6 +12,10 @@
     "linear": {
       "type": "remote",
       "url": "https://mcp.linear.app/mcp"
+    },
+    "betterstack": {
+      "type": "remote",
+      "url": "https://mcp.betterstack.com"
     }
   },
   "disabled_providers": ["amazon-bedrock"],
