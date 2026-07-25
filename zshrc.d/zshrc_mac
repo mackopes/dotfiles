@@ -47,7 +47,7 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 
-export AWS_PROFILE=blurry-prod
+export AWS_PROFILE=blurry-staging-admin
 
 . "$HOME/.cargo/env"
 
