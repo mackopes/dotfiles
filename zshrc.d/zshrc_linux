@@ -4,12 +4,14 @@ export PATH=~/.npm-global/bin:$PATH
 alias hyprconf="nvim ~/.config/hypr/hyprland.conf"
 
 # this is for cuda 13.0
-# export PATH=/opt/cuda/bin/:$PATH
-#
+export PATH=/opt/cuda/bin/:$PATH
+export PATH=/opt/cuda/bin:$PATH
+export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
+
 # This is for cuda 12.6
-export CUDA_HOME=/opt/cuda-12.6
-export PATH=/opt/cuda-12.6/bin:$PATH
-export LD_LIBRARY_PATH=/opt/cuda-12.6/lib64:$LD_LIBRARY_PATH
+# export CUDA_HOME=/opt/cuda-12.6
+# export PATH=/opt/cuda-12.6/bin:$PATH
+# export LD_LIBRARY_PATH=/opt/cuda-12.6/lib64:$LD_LIBRARY_PATH
 
 # when compiling packages, use all cores
 export MAKEFLAGS="-j$(nproc)"
