@@ -6,6 +6,4 @@ vim.g.root_spec = { "lua", "cwd" }
 
 vim.g.snacks_debug = true
 
-vim.g.python3_host_prog = vim.fn.system("poetry env info --path"):gsub("\n", "") .. "/bin/python"
-
 vim.g.neo_tree_hide_dotfiles = 0
