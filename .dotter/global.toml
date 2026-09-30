@@ -13,6 +13,7 @@ zshrc = "~/.zshrc"
 "opencode/tui.json" = "~/.config/opencode/tui.json"
 "opencode/package.json" = "~/.config/opencode/package.json"
 "opencode/plugins" = "~/.config/opencode/plugins/"
+"pi/agent" = "~/.pi/agent"
 "lazyworktree/config.yml" = "~/.config/lazyworktree/config.yml"
 
 [default.variables]
