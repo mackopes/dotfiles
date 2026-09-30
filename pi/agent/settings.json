@@ -1,0 +1,35 @@
+{
+  "lastChangelogVersion": "0.87.1",
+  "theme": "dark",
+  "packages": [
+    "npm:pi-subagents",
+    "npm:@ff-labs/pi-fff",
+    "npm:pi-mcp-adapter",
+    "npm:@tmustier/pi-raw-paste",
+    "npm:pi-btw",
+    "npm:pi-manage-todo-list",
+    "npm:@juanibiapina/pi-powerbar",
+    "npm:pi-web-access"
+  ],
+  "editorPaddingX": 1,
+  "defaultProvider": "openai-codex",
+  "defaultModel": "gpt-5.6-sol",
+  "enabledModels": [
+    "openai-codex/gpt-5.6-terra",
+    "zai/glm-5.3",
+    "openai-codex/gpt-6-astra",
+    "openai-codex/gpt-6-sol",
+    "openai-codex/gpt-6-luna"
+  ],
+  "defaultThinkingLevel": "high",
+  "hideThinkingBlock": false,
+  "subagents": {
+    "defaultExtensions": []
+  },
+  "outputPad": 1,
+  "markdown": {
+    "mermaid": "streaming"
+  },
+  "tuiMode": "fullscreen",
+  "showCacheMissNotices": true
+}

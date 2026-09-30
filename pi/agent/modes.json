@@ -1,0 +1,88 @@
+{
+  "defaultMode": "plan",
+  "defaultModelProfiles": {
+    "plan": {
+      "provider": "openai-codex",
+      "modelId": "gpt-5.6-sol",
+      "thinkingLevel": "high"
+    }
+  },
+  "modes": {
+    "plan": {
+      "inheritActiveTools": false,
+      "tools": [
+        "read",
+        "grep",
+        "find",
+        "ls",
+        "ffgrep",
+        "fffind",
+        "bash",
+        "web_search",
+        "source_check",
+        "fetch_content",
+        "get_search_content",
+        "subagent",
+        "subagent_wait"
+      ],
+      "bash": {
+        "allowShellSyntax": false,
+        "allow": [
+          ["pwd"],
+          ["ls"],
+          ["cat"],
+          ["head"],
+          ["tail"],
+          ["wc"],
+          ["file"],
+          ["stat"],
+          ["du"],
+          ["df"],
+          ["tree"],
+          ["which"],
+          ["type"],
+          ["uname"],
+          ["whoami"],
+          ["id"],
+          ["date"],
+          ["rg"],
+          ["grep"],
+          ["git", "status"],
+          ["git", "log"],
+          ["git", "diff"],
+          ["git", "show"],
+          ["git", "ls-files"],
+          ["git", "ls-tree"],
+          ["task", "runtime:compose", "--", "logs"],
+          ["task", "verify"]
+        ]
+      },
+      "actions": {
+        "subagent": {
+          "field": "action",
+          "allow": [null, "list", "get", "models", "status", "children.list"]
+        }
+      },
+      "instructions": [
+        "You are in PLAN mode. Explore and reason without changing files, repository state, services, or external systems.",
+        "Use only the currently enabled read-oriented tools and allowlisted Bash commands.",
+        "Do not implement changes. Produce a clear plan and identify uncertainties or decisions that need user input."
+      ]
+    },
+    "build": {
+      "inheritActiveTools": true,
+      "tools": [],
+      "bash": {
+        "allowShellSyntax": true,
+        "allow": [["*"]]
+      },
+      "actions": {},
+      "instructions": [
+        "You are in BUILD mode. You may use the normal active Pi tool set to implement requested changes.",
+        "Follow all other configured permission systems and project instructions.",
+        "Do not ask for plan confirmation unless unsure about the exact direction",
+        "Validate changes before reporting completion."
+      ]
+    }
+  }
+}

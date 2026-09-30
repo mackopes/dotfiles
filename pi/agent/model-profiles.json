@@ -1,0 +1,8 @@
+{
+  "active": "opencode",
+  "opencode": {
+    "ask": "openai-codex/gpt-5.6-terra:medium",
+    "plan": "openai-codex/gpt-5.6-sol:medium",
+    "auto": "openai-codex/gpt-5.6-terra:medium"
+  }
+}

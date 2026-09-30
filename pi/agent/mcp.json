@@ -1,0 +1,30 @@
+{
+  "settings": {
+    "directTools": false,
+    "autoAuth": false
+  },
+  "mcpServers": {
+    "context7": {
+      "url": "https://mcp.context7.com/mcp",
+      "lifecycle": "lazy",
+      "directTools": false
+    },
+    "chrome-devtools": {
+      "command": "npx",
+      "args": ["-y", "chrome-devtools-mcp@latest"],
+      "lifecycle": "lazy",
+      "directTools": false
+    },
+    "linear": {
+      "url": "https://mcp.linear.app/mcp",
+      "auth": "oauth",
+      "lifecycle": "lazy",
+      "directTools": false
+    },
+    "betterstack": {
+      "url": "https://mcp.betterstack.com",
+      "lifecycle": "lazy",
+      "directTools": false
+    }
+  }
+}
