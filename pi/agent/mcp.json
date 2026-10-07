@@ -1,30 +1,20 @@
 {
-  "settings": {
-    "directTools": false,
-    "autoAuth": false
-  },
   "mcpServers": {
     "context7": {
-      "url": "https://mcp.context7.com/mcp",
-      "lifecycle": "lazy",
-      "directTools": false
+      "url": "https://mcp.context7.com/mcp"
     },
     "chrome-devtools": {
       "command": "npx",
-      "args": ["-y", "chrome-devtools-mcp@latest"],
-      "lifecycle": "lazy",
-      "directTools": false
+      "args": ["-y", "chrome-devtools-mcp@latest"]
     },
     "linear": {
-      "url": "https://mcp.linear.app/mcp",
-      "auth": "oauth",
-      "lifecycle": "lazy",
-      "directTools": false
+      "url": "https://mcp.linear.app/mcp"
     },
     "betterstack": {
-      "url": "https://mcp.betterstack.com",
-      "lifecycle": "lazy",
-      "directTools": false
+      "url": "https://mcp.betterstack.com"
+    },
+    "notion": {
+      "url": "https://mcp.notion.com/mcp"
     }
   }
 }

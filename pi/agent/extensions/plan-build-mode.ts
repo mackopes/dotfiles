@@ -9,7 +9,7 @@ import { join } from "node:path";
 import {
   registerSubagentCapabilityCeiling,
   type SubagentCapabilityCeilingHandle,
-} from "../npm/node_modules/pi-subagents/src/api/capability-ceiling.ts";
+} from "../npm/node_modules/pi-subagents/src/api/capability-ceiling.js";
 
 type ModeName = "plan" | "build";
 type ThinkingLevel = "off" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max";
@@ -530,7 +530,7 @@ export default async function planBuildModeExtension(pi: ExtensionAPI): Promise<
   }
 
   function modeDescription(modeName: ModeName): string {
-    return modeName === "plan" ? "PLAN · read only" : "BUILD · write enabled";
+    return modeName === "plan" ? "PLAN · local read only · Linear/Better Stack MCP" : "BUILD · write enabled";
   }
 
   function ensureModeWidget(ctx: ExtensionContext): void {
@@ -545,7 +545,7 @@ export default async function planBuildModeExtension(pi: ExtensionAPI): Promise<
             const selectedIsPlan = selectedMode === "plan";
             const banner = agentRunning
               ? `◆  RUNNING ${activeMode.toUpperCase()}  ·  NEXT ${selectedMode.toUpperCase()}`
-              : `◆  NEXT MESSAGE: ${selectedMode.toUpperCase()}  ·  ${selectedIsPlan ? "READ ONLY" : "WRITES ENABLED"}`;
+              : `◆  NEXT MESSAGE: ${selectedMode.toUpperCase()}  ·  ${selectedIsPlan ? "LOCAL READ ONLY · MCP ENABLED" : "WRITES ENABLED"}`;
             return [
               theme.fg(
                 selectedIsPlan ? "warning" : "border",
@@ -647,7 +647,7 @@ export default async function planBuildModeExtension(pi: ExtensionAPI): Promise<
 
     const isPlan = data.mode === "plan";
     const stamp = isPlan
-      ? "◆  PLAN MODE  ·  THIS PROMPT WAS READ-ONLY"
+      ? "◆  PLAN MODE  ·  LOCAL READ-ONLY · LINEAR/BETTER STACK MCP ENABLED"
       : "◆  BUILD MODE  ·  WRITES WERE ENABLED";
     return new Text(
       theme.fg(isPlan ? "warning" : "border", theme.bold(stamp)),
@@ -691,7 +691,7 @@ export default async function planBuildModeExtension(pi: ExtensionAPI): Promise<
   });
 
   pi.registerCommand("plan", {
-    description: "Set the next message to read-only plan mode",
+    description: "Set the next message to locally read-only plan mode",
     handler: async (_args, ctx) => await setMode("plan", ctx),
   });
 

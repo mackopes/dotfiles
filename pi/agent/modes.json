@@ -18,6 +18,8 @@
         "ffgrep",
         "fffind",
         "bash",
+        "mcp__linear",
+        "mcp__betterstack",
         "web_search",
         "source_check",
         "fetch_content",
@@ -64,9 +66,9 @@
         }
       },
       "instructions": [
-        "You are in PLAN mode. Explore and reason without changing files, repository state, services, or external systems.",
-        "Use only the currently enabled read-oriented tools and allowlisted Bash commands.",
-        "Do not implement changes. Produce a clear plan and identify uncertainties or decisions that need user input."
+        "You are in PLAN mode. Do not change local files, repository state, or local services. Linear and Better Stack MCP tools are available; their write operations may be used when explicitly requested by the user.",
+        "Use only the currently enabled tools and allowlisted Bash commands.",
+        "Do not implement local code changes. Produce a clear plan and identify uncertainties or decisions that need user input."
       ]
     },
     "build": {

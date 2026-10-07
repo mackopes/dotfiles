@@ -1,10 +1,9 @@
 {
-  "lastChangelogVersion": "0.87.1",
+  "lastChangelogVersion": "1.0.2",
   "theme": "dark",
   "packages": [
     "npm:pi-subagents",
     "npm:@ff-labs/pi-fff",
-    "npm:pi-mcp-adapter",
     "npm:@tmustier/pi-raw-paste",
     "npm:pi-btw",
     "npm:pi-manage-todo-list",
