@@ -1,5 +1,10 @@
+ANTIGEN_AUTO_CONFIG=false
+# Don't forget to run these commands when you change the plugin list
+# antigen reset
+# exec zsh
+
 # Path to your oh-my-zsh installation.
-source ~/.antigen.zsh
+source ~/.antigen/antigen.zsh
 
 # Load the oh-my-zsh's library.
 antigen use oh-my-zsh
