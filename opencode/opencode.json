@@ -1,53 +1,42 @@
 {
   "$schema": "https://opencode.ai/config.json",
   "mcp": {
-    "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp"
-    },
-    "chrome-devtools": {
-      "type": "local",
-      "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
-    },
-    "linear": {
-      "type": "remote",
-      "url": "https://mcp.linear.app/mcp"
-    },
-    "betterstack": {
-      "type": "remote",
-      "url": "https://mcp.betterstack.com"
+    "servers": {
+      "context7": {
+        "type": "remote",
+        "url": "https://mcp.context7.com/mcp"
+      },
+      "chrome-devtools": {
+        "type": "local",
+        "command": ["npx", "-y", "chrome-devtools-mcp@latest"]
+      },
+      "linear": {
+        "type": "remote",
+        "url": "https://mcp.linear.app/mcp"
+      },
+      "betterstack": {
+        "type": "remote",
+        "url": "https://mcp.betterstack.com"
+      }
     }
   },
-  "disabled_providers": ["amazon-bedrock"],
-  "plugin": ["opencode-openai-codex-auth"],
-  // "model": "openai/gpt-5.3-codex-spark",
-  // "small_model": "anthropic/claude-haiku-4-5", // title gen, lightweight tasks
-  "small_model": "openai/gpt-5.6-luna",
-  "provider": {
+  "policies": [
+    { "action": "provider.use", "resource": "amazon-bedrock", "effect": "deny" }
+  ],
+  "model": "openai/gpt-6.1-sol",
+  "providers": {
     "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "Ollama",
-      "options": {
+      "settings": {
         "baseURL": "http://localhost:11434/v1"
-      },
-      "models": {
-        "qwen3.6:27b-coding-mxfp8": {
-          "_launch": true,
-          "name": "qwen3.6:27b-coding-mxfp8"
-        },
-        "qwen3.6": {
-          "_launch": true,
-          "name": "qwen3.6"
-        },
-        "gemma4": {
-          "_launch": true,
-          "name": "gemma4"
-        }
       }
     }
   },
   "default_agent": "plan",
-  "agent": {
+  "agents": {
+    "title": {
+      "model": "openai/gpt-5.6-luna"
+    },
     "build": {
       // "model": "ollama/qwen3-coder-next:q4_K_M"
       // "model": "anthropic/claude-haiku-4-5",
@@ -55,16 +44,14 @@
       // "model": "opencode/claude-sonnet-4-6",
       // "model": "openai/gpt-5.3-codex-spark",
       "model": "openai/gpt-5.6-terra",
-      "permission": {
-        "bash": {
-          "git commit*": "deny",
-          "git stash*": "deny",
-          "git push*": "deny",
-          "git rebase*": "deny",
-          "git merge*": "deny",
-          "git reset*": "deny"
-        }
-      }
+      "permissions": [
+        { "action": "shell", "resource": "git *", "effect": "ask" },
+        { "action": "shell", "resource": "git status *", "effect": "allow" },
+        { "action": "shell", "resource": "git diff *", "effect": "allow" },
+        { "action": "shell", "resource": "git log *", "effect": "allow" },
+        { "action": "shell", "resource": "git show *", "effect": "allow" },
+        { "action": "shell", "resource": "gh pr *", "effect": "ask" }
+      ]
     },
     "explore": {
       "model": "openai/gpt-5.6-luna",
@@ -74,82 +61,53 @@
     "plan": {
       // "model": "opencode/claude-opus-4-6",
       // "model": "openai/gpt-5.4",
-      "model": "openai/gpt-5.6-sol",
-      "temperature": 0.1,
-      "tools": {
-        "write": false,
-        "edit": false,
-        "patch": false
-      },
-      "permission": {
-        "bash": {
-          "*": "deny",
-          "git status": "allow",
-          "git diff*": "allow",
-          "git log*": "allow",
-          "git show*": "allow",
-          "coast build": "ask",
-          "coast run *": "ask",
-          "coast ui": "ask",
-          "coast harness-setup-prompt *": "ask",
-          "coast docs": "allow",
-          "coast docs --path *": "allow",
-          "coast search-docs *": "allow",
-          "coast --version": "allow",
-          "coast help": "allow",
-          "coast build --help": "allow",
-          "coast run --help": "allow",
-          "coast ui --help": "allow",
-          "coast harness-setup-prompt --help": "allow",
-          "coast lookup": "allow",
-          "coast ls": "allow",
-          "coast ps": "allow",
-          "coast logs *": "allow",
-          "git worktree list": "allow",
-          "git worktree list --porcelain": "allow",
-          "pwd": "allow",
-          "docker compose config": "allow",
-          "docker compose ps": "allow",
-          "docker volume ls": "allow",
-          "rg *": "allow",
-          "tree *": "allow",
-          "wc *": "allow",
-          "head *": "allow",
-          "tail *": "allow",
-          "pnpm test*": "ask",
-          "docker compose logs *": "allow",
-          "dixie *": "allow"
-        },
-        "task": {
-          "*": "deny",
-          "explore": "allow",
-          "git": "ask"
+      "model": "openai/gpt-6.1-sol",
+      "request": {
+        "body": {
+          "temperature": 0.1
         }
-      }
-    },
-    "git": {
-      // "model": "anthropic/claude-sonnet-4-6",
-      "model": "openai/gpt-5.6-luna",
-      "mode": "subagent",
-      "description": "Git and GitHub operations agent (stage, commit, push, create/update PRs, read PR state). ONLY invoke this agent when explicitly asked to perform a git operation. Since this agent cannot read any files or code on its own, the calling agent must provide all necessary context in the prompt (e.g. file paths, diff content, commit message, PR title/body, branch names, etc.).",
-      "tools": {
-        "write": false,
-        "edit": false,
-        "patch": false,
-        "glob": false,
-        "grep": false,
-        "read": false
       },
-      "permission": {
-        "bash": {
-          "*": "deny",
-          "git *": "allow",
-          "gh pr *": "allow"
-        },
-        "task": {
-          "*": "deny"
-        }
-      }
+      "permissions": [
+        { "action": "edit", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "*", "effect": "deny" },
+        { "action": "shell", "resource": "git status", "effect": "allow" },
+        { "action": "shell", "resource": "git diff*", "effect": "allow" },
+        { "action": "shell", "resource": "git log*", "effect": "allow" },
+        { "action": "shell", "resource": "git show*", "effect": "allow" },
+        { "action": "shell", "resource": "coast build", "effect": "ask" },
+        { "action": "shell", "resource": "coast run *", "effect": "ask" },
+        { "action": "shell", "resource": "coast ui", "effect": "ask" },
+        { "action": "shell", "resource": "coast harness-setup-prompt *", "effect": "ask" },
+        { "action": "shell", "resource": "coast docs", "effect": "allow" },
+        { "action": "shell", "resource": "coast docs --path *", "effect": "allow" },
+        { "action": "shell", "resource": "coast search-docs *", "effect": "allow" },
+        { "action": "shell", "resource": "coast --version", "effect": "allow" },
+        { "action": "shell", "resource": "coast help", "effect": "allow" },
+        { "action": "shell", "resource": "coast build --help", "effect": "allow" },
+        { "action": "shell", "resource": "coast run --help", "effect": "allow" },
+        { "action": "shell", "resource": "coast ui --help", "effect": "allow" },
+        { "action": "shell", "resource": "coast harness-setup-prompt --help", "effect": "allow" },
+        { "action": "shell", "resource": "coast lookup", "effect": "allow" },
+        { "action": "shell", "resource": "coast ls", "effect": "allow" },
+        { "action": "shell", "resource": "coast ps", "effect": "allow" },
+        { "action": "shell", "resource": "coast logs *", "effect": "allow" },
+        { "action": "shell", "resource": "git worktree list", "effect": "allow" },
+        { "action": "shell", "resource": "git worktree list --porcelain", "effect": "allow" },
+        { "action": "shell", "resource": "pwd", "effect": "allow" },
+        { "action": "shell", "resource": "docker compose config", "effect": "allow" },
+        { "action": "shell", "resource": "docker compose ps", "effect": "allow" },
+        { "action": "shell", "resource": "docker volume ls", "effect": "allow" },
+        { "action": "shell", "resource": "rg *", "effect": "allow" },
+        { "action": "shell", "resource": "tree *", "effect": "allow" },
+        { "action": "shell", "resource": "wc *", "effect": "allow" },
+        { "action": "shell", "resource": "head *", "effect": "allow" },
+        { "action": "shell", "resource": "tail *", "effect": "allow" },
+        { "action": "shell", "resource": "pnpm test*", "effect": "ask" },
+        { "action": "shell", "resource": "docker compose logs *", "effect": "allow" },
+        { "action": "shell", "resource": "dixie *", "effect": "allow" },
+        { "action": "subagent", "resource": "*", "effect": "deny" },
+        { "action": "subagent", "resource": "explore", "effect": "allow" }
+      ]
     }
   }
 }
