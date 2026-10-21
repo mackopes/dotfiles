@@ -1,5 +1,5 @@
 {
-  "lastChangelogVersion": "1.0.2",
+  "lastChangelogVersion": "1.2.0",
   "theme": "dark",
   "packages": [
     "npm:pi-subagents",
@@ -17,8 +17,8 @@
     "openai-codex/gpt-5.6-terra",
     "zai/glm-5.3",
     "openai-codex/gpt-6-astra",
-    "openai-codex/gpt-6-sol",
-    "openai-codex/gpt-6-luna"
+    "openai-codex/gpt-6-luna",
+    "openai-codex/gpt-6.1-sol"
   ],
   "defaultThinkingLevel": "high",
   "hideThinkingBlock": false,

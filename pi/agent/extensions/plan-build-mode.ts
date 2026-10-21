@@ -208,6 +208,14 @@ function unique(values: string[]): string[] {
   return [...new Set(values)];
 }
 
+function matchesToolSelector(toolName: string, selector: string): boolean {
+  // A bare MCP namespace selects only that server, not similarly named servers.
+  return toolName === selector ||
+    (/^mcp__[a-zA-Z0-9_]+$/.test(selector) &&
+      !selector.slice("mcp__".length).includes("__") &&
+      toolName.startsWith(`${selector}__`));
+}
+
 function createModeMessageTag(mode: ModeName): string {
   modeMessageSequence += 1;
   return `<!-- PI_MODE_MESSAGE:${mode}:${Date.now().toString(36)}-${modeMessageSequence.toString(36)} -->`;
@@ -381,7 +389,6 @@ export default async function planBuildModeExtension(pi: ExtensionAPI): Promise<
   let activeMode: ModeName = config.defaultMode;
   let baselineTools: string[] = [];
   let modelProfiles: ModeModelProfiles = {};
-  let allowedTools = new Set<string>();
   let subagentCeiling: SubagentCapabilityCeilingHandle | undefined;
   let subagentCeilingSessionId: string | undefined;
   let sessionStarted = false;
@@ -586,7 +593,6 @@ export default async function planBuildModeExtension(pi: ExtensionAPI): Promise<
   }
 
   function applyActiveMode(ctx: ExtensionContext, persist = true): void {
-    allowedTools = new Set(configuredAllowedTools(activeMode));
     syncSubagentCeiling(ctx);
     updateStatus(ctx);
     if (persist) persistState();
@@ -834,41 +840,65 @@ export default async function planBuildModeExtension(pi: ExtensionAPI): Promise<
     updateStatus(ctx);
   });
 
-  pi.on("tool_call", async (event) => {
-    const current = policy(activeMode);
-    const dynamicallyInherited =
-      current.inheritActiveTools && pi.getActiveTools().includes(event.toolName);
+  function blockedToolCall(
+    modeName: ModeName,
+    toolName: string,
+    input: unknown,
+  ): { block: true; reason: string } | undefined {
+    const current = policy(modeName);
+    // Deferred/codemode tools are callable without being in the active (declared)
+    // tool set. Check at call time so late MCP connections work as well.
+    const exposure = pi.getAllTools().find((tool) => tool.name === toolName)?.exposure;
+    const dynamicallyInherited = current.inheritActiveTools && (
+      pi.getActiveTools().includes(toolName) ||
+      exposure === "codemode" || exposure === "deferred"
+    );
+    const explicitlyAllowed = configuredAllowedTools(modeName).some(
+      (selector) => matchesToolSelector(toolName, selector),
+    );
 
-    if (!allowedTools.has(event.toolName) && !dynamicallyInherited) {
+    if (!explicitlyAllowed && !dynamicallyInherited) {
       return {
         block: true,
-        reason: `${event.toolName} is not permitted in ${activeMode.toUpperCase()} mode`,
+        reason: `${toolName} is not permitted in ${modeName.toUpperCase()} mode`,
       };
     }
 
-    if (event.toolName === "bash") {
+    if (toolName === "bash") {
       const command = String(
-        (event.input as { command?: unknown } | undefined)?.command ?? "",
+        (input as { command?: unknown } | undefined)?.command ?? "",
       );
       if (!isAllowedBash(command, current.bash)) {
         return {
           block: true,
-          reason: `${activeMode.toUpperCase()} mode blocked this Bash command: ${command}`,
+          reason: `${modeName.toUpperCase()} mode blocked this Bash command: ${command}`,
         };
       }
     }
 
-    const actionPolicy = current.actions[event.toolName];
+    const actionPolicy = current.actions[toolName];
     if (actionPolicy) {
-      const rawValue = getField(event.input, actionPolicy.field);
+      const rawValue = getField(input, actionPolicy.field);
       const value = rawValue === undefined ? null : rawValue;
       if (!actionPolicy.allow.some((allowed) => Object.is(allowed, value))) {
         return {
           block: true,
-          reason: `${activeMode.toUpperCase()} mode does not permit ${event.toolName}.${actionPolicy.field}=${String(value)}`,
+          reason: `${modeName.toUpperCase()} mode does not permit ${toolName}.${actionPolicy.field}=${String(value)}`,
         };
       }
     }
+  }
+
+  pi.on("tool_call", async (event) => {
+    // Pi sends nested Codemode calls through this same hook. Never exempt them.
+    const blocked = blockedToolCall(activeMode, event.toolName, event.input);
+    // Build is additive: every complete call allowed in Plan remains allowed,
+    // including its Bash/action arguments. Other permission extensions still run.
+    if (blocked && activeMode === "build" &&
+        !blockedToolCall("plan", event.toolName, event.input)) {
+      return;
+    }
+    return blocked;
   });
 
   pi.on("session_shutdown", async (_event, ctx) => {

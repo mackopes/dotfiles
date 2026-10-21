@@ -18,6 +18,7 @@
         "ffgrep",
         "fffind",
         "bash",
+        "codemode",
         "mcp__linear",
         "mcp__betterstack",
         "web_search",
@@ -67,6 +68,7 @@
       },
       "instructions": [
         "You are in PLAN mode. Do not change local files, repository state, or local services. Linear and Better Stack MCP tools are available; their write operations may be used when explicitly requested by the user.",
+        "Codemode is available for tool discovery and permitted calls; every nested call remains subject to this mode's tool, Bash, and action restrictions.",
         "Use only the currently enabled tools and allowlisted Bash commands.",
         "Do not implement local code changes. Produce a clear plan and identify uncertainties or decisions that need user input."
       ]
@@ -80,7 +82,8 @@
       },
       "actions": {},
       "instructions": [
-        "You are in BUILD mode. You may use the normal active Pi tool set to implement requested changes.",
+        "You are in BUILD mode. You may use all PLAN-mode capabilities plus the normal active and deferred Pi tool set to implement requested changes.",
+        "Linear read and write tools are available. Use write operations only when explicitly requested by the user; follow configured confirmation safeguards for destructive operations.",
         "Follow all other configured permission systems and project instructions.",
         "Do not ask for plan confirmation unless unsure about the exact direction",
         "Validate changes before reporting completion."
